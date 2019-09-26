@@ -56,7 +56,7 @@ async def emoji(ctx):
     
 @bot.command()
 async def nameOfGuild(ctx):
-    name = discord.Guild.name
+    name = str(discord.Guild)
     await ctx.send(name)
 
 @bot.command()
