@@ -1,5 +1,8 @@
 import discord
-from discord.ext import commands ,CommandNotFound, fetch_emojis
+from discord.ext import commands
+from discord.ext.commands import CommandNotFound
+from discord.utils import get
+
 
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
 
@@ -24,8 +27,8 @@ async def 測試(ctx):
 
 @bot.command()
 async def penguinLaugh(ctx):
-    emojiList = fetch_emojis()
-    await ctx.send(emojiList)
+    emoji = get(bot.get_all_emojis,name='Penguin')
+    await ctx.send(emoji)
 
 @bot.event
 async def on_command_error(ctx, error):
