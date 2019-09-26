@@ -50,7 +50,7 @@ async def penguinLaugh(ctx):
 
 @bot.command()
 async def emoji(ctx):
-    emojiList = await guild.fetch_emojis()
+    emojiList = await guild.fetch_emojis(guild)
     for i in emojiList:
         await ctx.send(emojiList[i].id)
     
