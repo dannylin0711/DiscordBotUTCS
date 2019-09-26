@@ -1,4 +1,5 @@
 import discord
+import os
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from discord.utils import get
@@ -41,6 +42,8 @@ async def penguinLaugh(ctx):
     await ctx.send("""<:Penguin:623835905999896626>
 <:Penguin:623835905999896626><:Penguin:623835905999896626>
 <:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>
+<:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>
+<:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>
 <:Penguin:623835905999896626><:Penguin:623835905999896626>
 <:Penguin:623835905999896626>""")
 
@@ -51,5 +54,6 @@ async def on_command_error(ctx, error):
         return
     raise error
 
+BOT_TOKEN = os.environ.get('DISCORD_BOT_TOKEN')
 
-bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwzFg.bKob86Qwh4HkNnCFbutEStOj7VU')
+bot.run(BOT_TOKEN)
