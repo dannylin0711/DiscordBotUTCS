@@ -51,7 +51,9 @@ async def penguinLaugh(ctx):
 @bot.command()
 async def emoji(ctx):
     emojiList = client.emojis
-    ctx.send(emojiList.toString)
+    for i in emojiList:
+        ctx.send(emojiList.toString)
+    
 
 @bot.command()
 async def test(ctx):
