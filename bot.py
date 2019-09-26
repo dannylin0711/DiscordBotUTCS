@@ -28,7 +28,11 @@ async def 測試(ctx):
 @bot.command()
 async def penguinLaugh(ctx):
 
-    await ctx.send('<:Penguin:623835905999896626>\n<:Penguin:623835905999896626><:Penguin:623835905999896626>\n<:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>\n<:Penguin:623835905999896626><:Penguin:623835905999896626>\n<:Penguin:623835905999896626>')
+    await ctx.send("""<:Penguin:623835905999896626>
+    <:Penguin:623835905999896626><:Penguin:623835905999896626>
+    <:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>
+    <:Penguin:623835905999896626><:Penguin:623835905999896626>
+    <:Penguin:623835905999896626>""")
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -38,7 +42,7 @@ async def on_command_error(ctx, error):
     raise error
 
 
-from discord.utils import get
+
 
 @bot.event
 async def on_message(message):
