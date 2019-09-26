@@ -38,7 +38,16 @@ async def on_command_error(ctx, error):
     raise error
 
 
+from discord.utils import get
 
+@bot.event
+async def on_message(message):
+    # we do not want the bot to reply to itself
+    if message.author == bot.user:
+        return
+    if 'RRRR' in message.content:
+        emoji = get(bot.get_all_emojis(), name='Penguin')
+        await bot.add_reaction(message, emoji)
 
 
 
