@@ -14,4 +14,5 @@ async def on_ready():
 async def add(ctx, a: int, b: int):
     await ctx.send(a+b)
 
-bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwubg.lJB0vo6uMKFgS9PJWzIpWOGZrfM')
+bot.login("NjI2NjA1NjQxMDkxNTE0Mzc4.XYwxlg.Q-6QtW7Q9Ipq9AJ5-iwWnKtaS9o")
+bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwxlg.Q-6QtW7Q9Ipq9AJ5-iwWnKtaS9o')
