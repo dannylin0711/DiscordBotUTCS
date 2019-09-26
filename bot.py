@@ -54,6 +54,10 @@ async def emoji(ctx):
     for i in emojiList:
         ctx.send(emojiList[i].id)
     
+@bot.command()
+async def nameOfGuild(ctx):
+    name = discord.Guild.name
+    ctx.send(name)
 
 @bot.command()
 async def test(ctx):
