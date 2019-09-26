@@ -47,6 +47,11 @@ async def penguinLaugh(ctx):
 <:Penguin:623835905999896626><:Penguin:623835905999896626>
 <:Penguin:623835905999896626>""")
 
+@bot.command()
+async def test(ctx):
+    await ctx.send("""This is a test message!
+這是測試訊息""")
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
