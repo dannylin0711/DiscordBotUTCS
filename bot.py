@@ -12,7 +12,7 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    
+
 @bot.event
 async def on_message(message):
     # we do not want the bot to reply to itself
@@ -21,6 +21,7 @@ async def on_message(message):
     if 'RRRR' in message.content:
         emoji = bot.get_emoji(623835905999896626)
         await message.add_reaction(emoji)
+    await bot.process_commands(message)
 
 @bot.command()
 async def add(ctx, a: int, b: int):
@@ -49,13 +50,6 @@ async def on_command_error(ctx, error):
         await ctx.send('打錯指令辣')
         return
     raise error
-
-
-
-
-
-        
-
 
 
 bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwzFg.bKob86Qwh4HkNnCFbutEStOj7VU')
