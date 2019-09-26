@@ -27,8 +27,8 @@ async def 測試(ctx):
 
 @bot.command()
 async def penguinLaugh(ctx):
-    emojiStr = '<:Penguin:623835905999896626>'
-    await ctx.send(emojiStr)
+
+    await ctx.send('<:Penguin:623835905999896626>\n<:Penguin:623835905999896626><:Penguin:623835905999896626>\n<:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>\n<:Penguin:623835905999896626><:Penguin:623835905999896626>\n<:Penguin:623835905999896626>')
 
 @bot.event
 async def on_command_error(ctx, error):
