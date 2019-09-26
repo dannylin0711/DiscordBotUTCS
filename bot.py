@@ -27,7 +27,7 @@ async def 測試(ctx):
 
 @bot.command()
 async def penguinLaugh(ctx):
-    emoji = get(bot.get_all_emojis,name='Penguin')
+    emoji = get(bot.get_all_emojis(),name='Penguin')
     await ctx.send(emoji)
 
 @bot.event
