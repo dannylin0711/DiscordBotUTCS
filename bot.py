@@ -23,6 +23,9 @@ async def laugh(ctx):
 async def 測試(ctx):
     await ctx.send('你到底想幹嘛')
 
+@bot.command()
+async def penguinLaugh(ctx):
+    await ctx.send(':Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin::Penguin:')
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -30,6 +33,8 @@ async def on_command_error(ctx, error):
         await ctx.send('打錯指令辣')
         return
     raise error
+
+
 
 
 
