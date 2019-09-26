@@ -12,6 +12,15 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+    
+@bot.event
+async def on_message(message):
+    # we do not want the bot to reply to itself
+    if message.author == bot.user:
+        return
+    if 'RRRR' in message.content:
+        emoji = bot.get_emoji(623835905999896626)
+        await message.add_reaction(emoji)
 
 @bot.command()
 async def add(ctx, a: int, b: int):
@@ -44,14 +53,7 @@ async def on_command_error(ctx, error):
 
 
 
-@bot.event
-async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == bot.user:
-        return
-    if 'RRRR' in message.content:
-        emoji = bot.get_emoji(623835905999896626)
-        await message.add_reaction(emoji)
+
         
 
 
