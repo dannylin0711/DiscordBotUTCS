@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands import CommandNotFound
 
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
 
@@ -17,6 +18,15 @@ async def add(ctx, a: int, b: int):
 @bot.command()
 async def laugh(ctx):
     await ctx.send('哈哈...')
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        await ctx.send('打錯指令辣')
+        return
+    raise error
+
+
 
 
 bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwzFg.bKob86Qwh4HkNnCFbutEStOj7VU')
