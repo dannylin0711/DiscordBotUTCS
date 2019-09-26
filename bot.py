@@ -4,7 +4,6 @@ from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from discord.utils import get
 from discord import Guild
-from discord import Server
 
 guild = Guild
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
@@ -57,9 +56,8 @@ async def emoji(ctx):
     
 @bot.command()
 async def nameOfGuild(ctx):
-    name = str(discord.Guild)
-    Server.emojis
-    await ctx.send(name)
+    
+    await ctx.send('name')
 
 @bot.command()
 async def test(ctx):
