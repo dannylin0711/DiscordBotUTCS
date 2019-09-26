@@ -19,6 +19,11 @@ async def add(ctx, a: int, b: int):
 async def laugh(ctx):
     await ctx.send('哈哈...')
 
+@bot.command()
+async def 測試(ctx):
+    await ctx.send('你到底想幹嘛')
+
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
