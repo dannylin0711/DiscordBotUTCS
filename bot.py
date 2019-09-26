@@ -27,8 +27,9 @@ async def 測試(ctx):
 
 @bot.command()
 async def penguinLaugh(ctx):
-    
-    await ctx.send('<:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626><:Penguin:623835905999896626>')
+    emojiStr = '<:Penguin:623835905999896626>'
+    str = emojiStr+'\n'+emojiStr+emojiStr+'\n'+emojiStr
+    await ctx.send(str)
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -48,6 +49,7 @@ async def on_message(message):
     if 'RRRR' in message.content:
         emoji = bot.get_emoji(623835905999896626)
         await message.add_reaction(emoji)
+        
 
 
 
