@@ -3,9 +3,9 @@ import os
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from discord.utils import get
-from discord import Client
+from discord import Guild
 
-client = Client
+guild = Guild
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
 
 @bot.event
@@ -50,9 +50,9 @@ async def penguinLaugh(ctx):
 
 @bot.command()
 async def emoji(ctx):
-    emojiList = client.emojis
+    emojiList = guild.emojis
     for i in emojiList:
-        ctx.send(emojiList.toString)
+        ctx.send(emojiList[i])
     
 
 @bot.command()
