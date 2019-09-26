@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-bot = commands.Bot(commands_prefix='$')
+bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
 
 @bot.event
 async def on_ready():
@@ -14,4 +14,4 @@ async def on_ready():
 async def add(ctx, a: int, b: int):
     await ctx.send(a+b)
 
-bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwnOg.LgSd8EwhAFIq1Pyr35eeH7K18mk')
+bot.run('NjI2NjA1NjQxMDkxNTE0Mzc4.XYwteQ.dJaSGs-tp3ia-HPqqU35uGTUniU')
