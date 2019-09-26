@@ -46,7 +46,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if 'RRRR' in message.content:
-        emoji = get(bot.get_all_emojis(), name='Penguin')
+        emoji = bot.get_emoji(623835905999896626)
         await bot.add_reaction(message, emoji)
 
 
