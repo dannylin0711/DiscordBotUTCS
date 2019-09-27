@@ -53,7 +53,9 @@ async def penguinLaugh(ctx):
 @bot.command()
 async def emoji(ctx):
     emojiList = bot.emojis
-    await ctx.send(emojiList[1])
+    emojiString = "<:"
+    emojiString += (emojiList[1].name + ":"+emojiList[1].id)+">"
+    await ctx.send(emojiString)
     
     
 @bot.command()
