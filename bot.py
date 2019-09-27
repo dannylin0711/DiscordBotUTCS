@@ -55,6 +55,7 @@ async def emoji(ctx):
     emojiList = bot.emojis
     emojiString = "<:"
     emojiString += (emojiList[1].name + ":"+emojiList[1].id)+">"
+    print(emojiString)
     await ctx.send(emojiString)
     
     
