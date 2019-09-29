@@ -57,7 +57,7 @@ async def emoji(ctx):
     emojiString += (emojiList[1].name + ":"+str(emojiList[1].id))+">"
     await ctx.send(emojiString)
     
-    
+
 @bot.command()
 async def nameOfGuild(ctx):
     
@@ -67,6 +67,10 @@ async def nameOfGuild(ctx):
 async def test(ctx):
     await ctx.send("""This is a test message!
 這是測試訊息""")
+
+@bot.command()
+async def hahaha(ctx):
+    await ctx.send("""HAHAHAHAHAHAHAHAHAHA""")
 
 @bot.event
 async def on_command_error(ctx, error):
