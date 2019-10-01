@@ -79,8 +79,8 @@ async def join(ctx):
 
 @bot.command(pass_context=True)
 async def leave(ctx):
-    channel = ctx.message.author.voice.channel
-    await channel.disconnect()
+    server = ctx.voice_client
+    await server.disconnect()
 
 @bot.event
 async def on_command_error(ctx, error):
