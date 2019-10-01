@@ -75,7 +75,7 @@ async def hahaha(ctx):
 @bot.command(pass_context=True)
 async def join(ctx):
     channel = ctx.message.author.voice.channel
-    await bot.join_voice_channel(channel)
+    await channel.connect()
 
 @bot.command(pass_context=True)
 async def leave(ctx):
