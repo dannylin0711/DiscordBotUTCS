@@ -1,4 +1,4 @@
 dnspython
 PyNaCl
 async-timeout
-discord.py
+discord.py[voice]
