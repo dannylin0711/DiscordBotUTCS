@@ -10,7 +10,7 @@ DiscordBotUTCS
 
 1. 安裝Github Desktop
 2. 找到這個Git專案的網址，到Github Desktop裡面貼上並clone到自己的電腦上
-3. Clone完成後，在上方Current Branch選擇beta_master
+3. ~~Clone完成後，在上方Current Branch選擇beta_master~~先不要好了 改成直接Commit應該也沒問題(?
 4. 開始工作!
 5. 工作完成後，到Github Desktop上的左下角Commit Change，然後點上面push到Github上
 6. **我會先把程式碼clone下來，確認沒問題我就會Deploy到Bot上讓Bot執行**
