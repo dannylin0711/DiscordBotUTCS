@@ -19,7 +19,7 @@ async def on_ready():
     print(bot.user.id)
     print('------')
     activity = discord.Activity(name='RRRR', type=discord.ActivityType.playing, state='我在玩啦', details='時間是我已啟動的時間' , start=startuptime)
-    await client.change_presence(activity=activity)
+    await bot.change_presence(activity=activity)
     
 @bot.event
 async def on_message(message):
