@@ -7,7 +7,7 @@ from discord.utils import get
 from discord import Guild
 from discord import Client
 
-client = Client()
+client = Client
 guild = Guild
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
 startuptime = datetime.datetime.now()
@@ -18,8 +18,8 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    activity = discord.Activity(name='RRRR',type = discord.ActivityType.playing,state = '我在玩啦',details='時間是我已啟動的時間',start=startuptime)
-    await client.change_presence(activity = activity)
+    activity = discord.Activity(name='RRRR', type=discord.ActivityType.playing, state='我在玩啦', details='時間是我已啟動的時間' , start=startuptime)
+    await client.change_presence(activity=activity)
     
 @bot.event
 async def on_message(message):
