@@ -10,7 +10,7 @@ from discord import Client
 client = Client
 guild = Guild
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
-startuptime = datetime.now()
+startuptime = datetime.datetime.now()
 
 @bot.event
 async def on_ready():
