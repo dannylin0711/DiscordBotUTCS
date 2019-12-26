@@ -7,7 +7,7 @@ from discord.utils import get
 from discord import Guild
 from discord import Client
 
-client = Client
+client = Client()
 guild = Guild
 bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
 startuptime = datetime.datetime.now()
