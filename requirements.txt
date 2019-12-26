@@ -1,6 +1,6 @@
 dnspython
 PyNaCl
 async-timeout
-discord.py[voice]
+discord.py
 youtube_dl
 toml
