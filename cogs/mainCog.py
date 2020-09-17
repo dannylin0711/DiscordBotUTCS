@@ -13,38 +13,40 @@ startuptime = datetime.datetime.now()
 
 
 class mainCog(commands.Cog):
-    
-    def __init__(self,bot):
+
+    def __init__(self, bot):
         self.bot = bot
-    #await bot.get_channel(516470319242805272).send('我來嘍喵~')
+
+    # await bot.get_channel(516470319242805272).send('我來嘍喵~')
     @commands.command()
     async def add(self, ctx, a: int, b: int):
         """加法 兩個數字相加 用法: $add a b
         輸出a+b"""
-        await ctx.send(a+b)
-    
+        await ctx.send(a + b)
+
     @commands.command()
     async def say(self, ctx, a: str):
+        """讓機器人說話 因為是艾路貓所以會在尾巴說喵"""
         print("輸入:" + a)
         await ctx.message.delete()
         message = a
-        if('http' not in a):
-            if('<:' not in a):
+        if 'http' not in a:
+            if '<:' not in a:
                 message += "喵"
-        if('主人' in a):
+        if '主人' in a:
             message = "你才不是主人呢"
-        if('啥小' in a or '幹' in a or '媽的' in a):
+        if '啥小' in a or '幹' in a or '媽的' in a:
             message = "我不講髒話呦喵"
         print("輸出:" + message)
         await ctx.send(message)
-    
+
     @commands.command()
     async def adminsay(self, ctx, a: str):
         print(a)
         await ctx.message.delete()
         message = a
-        if('http' not in a):
-            if('<:' not in a):
+        if ('http' not in a):
+            if ('<:' not in a):
                 message += "喵"
         await ctx.send(message)
 
@@ -71,9 +73,9 @@ class mainCog(commands.Cog):
     async def emoji(self, ctx):
         emojiList = self.bot.emojis
         emojiString = "<:"
-        emojiString += (emojiList[1].name + ":"+str(emojiList[1].id))+">"
+        emojiString += (emojiList[1].name + ":" + str(emojiList[1].id)) + ">"
         await ctx.send(emojiString)
-    
+
     @commands.command()
     async def nameOfGuild(self, ctx):
         await ctx.send(ctx.channel.id)
@@ -112,15 +114,15 @@ class mainCog(commands.Cog):
         """沒事別用"""
         await ctx.send('我要下線了喵')
         await self.bot.close()
-    
+
     @commands.command()
     async def quote(self, ctx,a: int,reply:str = ''):
         """特殊Quote 比較漂亮"""
         temp = await ctx.fetch_message(a)
         message = "> "
-        message += temp.author.display_name + " 說了 " +temp.content
-        if(not reply is ''):
-            message += "\n\n\n**" +ctx.author.display_name+"回應說:**\n\n"+reply
+        message += temp.author.display_name + " 說了 " + temp.content
+        if not reply is '':
+            message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
         await ctx.send(message)
 
     @commands.command()
@@ -128,17 +130,18 @@ class mainCog(commands.Cog):
         """貓咪會救你 只是可能要等一下"""
         await ctx.channel.send("""主人危險!
 主人我來救您了喵!(跑到旁邊喝水""")
-    
+
     @commands.command()
     async def 激勵邦歌鼓口哨(self, ctx):
         """今天貓咪心情不太好"""
         await ctx.channel.send("""我現在沒空聽從指示啦喵！""")
-        
-        #await ctx.send("""主人危險!
-#主人我來救您了喵!(跑到旁邊喝水""")
-    
+
+        # await ctx.send("""主人危險!
+
+    # 主人我來救您了喵!(跑到旁邊喝水""")
+
     @commands.command(pass_context=True)
-    async def ping(self,ctx):
+    async def ping(self, ctx):
         """ Pong! """
         await ctx.message.delete()
         before = time.monotonic()
