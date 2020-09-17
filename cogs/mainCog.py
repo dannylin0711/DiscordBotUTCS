@@ -80,8 +80,9 @@ class mainCog(commands.Cog):
 
     @commands.command()
     async def test(self, ctx):
-        await ctx.send("""This is a test message!
-這是測試訊息""")
+        emoji = self.bot.get_emoji(411984275815137290)
+        await ctx.message.delete()
+        await ctx.send(emoji)
 
     @commands.command()
     async def hahaha(self, ctx):
@@ -92,20 +93,29 @@ class mainCog(commands.Cog):
         emojiList = self.bot.emojis
         emojiString = ""
         for emoji in emojiList:
-            print(emoji)
-            print("\n")
-            emojiString += "<:"+(emoji.name + ":"+str(emoji.id))+">"
+            emojiString += str(emoji)
         await ctx.send(emojiString)    
     
-
+    @commands.command()
+    async def kiang(self,ctx):
+        emoji = self.bot.get_emoji(699474147818078358)
+        await ctx.message.delete()
+        await ctx.send(emoji)
+        
+    @commands.command()
+    async def 摸摸艾路貓(self,ctx):
+        emoji = self.bot.get_emoji(754954248961261658)
+        await ctx.send(emoji)
     
     @commands.command()
     async def logout(self, ctx):
+        """沒事別用"""
         await ctx.send('我要下線了喵')
         await self.bot.close()
     
     @commands.command()
     async def quote(self, ctx,a: int,reply:str = ''):
+        """特殊Quote 比較漂亮"""
         temp = await ctx.fetch_message(a)
         message = "> "
         message += temp.author.display_name + " 說了 " +temp.content
@@ -115,11 +125,13 @@ class mainCog(commands.Cog):
 
     @commands.command()
     async def 動彈不得(self, ctx):
+        """貓咪會救你 只是可能要等一下"""
         await ctx.channel.send("""主人危險!
 主人我來救您了喵!(跑到旁邊喝水""")
     
     @commands.command()
     async def 激勵邦歌鼓口哨(self, ctx):
+        """今天貓咪心情不太好"""
         await ctx.channel.send("""我現在沒空聽從指示啦喵！""")
         
         #await ctx.send("""主人危險!
@@ -134,6 +146,8 @@ class mainCog(commands.Cog):
         ping = (time.monotonic() - before) * 1000
         await message.edit(content=f"Pong!  `{int(ping)}ms`")
         print(f'Ping {int(ping)}ms')
+        
+    
     
 def setup(bot):
     bot.add_cog(mainCog(bot))

@@ -18,6 +18,11 @@ class Events(commands.Cog):
         if 'RRRR' in message.content:
             emoji = self.bot.get_emoji(623835905999896626)
             await message.add_reaction(emoji)
+            
+        temp = message.content.replace(" ","")
+        if 'ㄎㄧㄤ' in temp:
+            emoji = self.bot.get_emoji(699474147818078358)
+            await message.add_reaction(emoji)
         
         
     @commands.Cog.listener()

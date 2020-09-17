@@ -9,7 +9,7 @@ from discord import Client
 
 client = Client
 guild = Guild
-bot = commands.Bot(command_prefix="$", description='A bot that greets the user back.')
+bot = commands.Bot(command_prefix="$", description='一隻艾路貓，會狠狠的戳人。')
 startuptime = datetime.datetime.now()
 #discord.opus.load_opus('libopus.dylib')
 
