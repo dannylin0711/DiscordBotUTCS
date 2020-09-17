@@ -2,6 +2,7 @@ import discord
 import os
 import datetime
 import time
+import sqlite3
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from discord.utils import get
@@ -16,6 +17,9 @@ class mainCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.dbconnect = sqlite3.connect('petcat.db')
+        self.dbcursor = self.dbconnect.cursor()
+        print('已載入好感度資料庫')
 
     # await bot.get_channel(516470319242805272).send('我來嘍喵~')
     @commands.command()
@@ -106,8 +110,25 @@ class mainCog(commands.Cog):
         
     @commands.command()
     async def 摸摸艾路貓(self,ctx):
+        """摸摸艾路貓 他會很開心"""
+        currectAuthor = str(ctx.author.id)
+        self.dbcursor.execute('SELECT * FROM PetCat WHERE userid ="' +currectAuthor+'"')
+        #self.dbcursor.execute('SELECT * FROM PetCat')
+        temp = self.dbcursor.fetchone()
+        petcounttemp = 0
+        if temp == None:
+            self.dbconnect.execute('INSERT INTO PetCat ("userid","pettime") VALUES ("'+currectAuthor+'",1)')
+            petcounttemp = 1
+        else:
+            (userid,petcount) = temp
+            petcounttemp = petcount
+            petcounttemp+=1
+            self.dbconnect.execute('UPDATE PetCat SET pettime='+str(petcounttemp)+' WHERE userid ="' +currectAuthor+'"')
+        self.dbconnect.commit()
         emoji = self.bot.get_emoji(754954248961261658)
         await ctx.send(emoji)
+        await ctx.send("你已經摸了艾路貓"+str(petcounttemp)+"次喔")
+        
     
     @commands.command()
     async def logout(self, ctx):
@@ -121,7 +142,7 @@ class mainCog(commands.Cog):
         temp = await ctx.fetch_message(a)
         message = "> "
         message += temp.author.display_name + " 說了 " + temp.content
-        if not reply is '':
+        if reply != '':
             message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
         await ctx.send(message)
 
@@ -150,7 +171,11 @@ class mainCog(commands.Cog):
         await message.edit(content=f"Pong!  `{int(ping)}ms`")
         print(f'Ping {int(ping)}ms')
         
-    
+    @commands.command()
+    async def getMessageAuthorID(self,ctx):
+        authorID = ctx.author
+        print(authorID.id)
+
     
 def setup(bot):
     bot.add_cog(mainCog(bot))
