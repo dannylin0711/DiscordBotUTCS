@@ -140,11 +140,35 @@ class mainCog(commands.Cog):
     async def quote(self, ctx,a: int,reply:str = ''):
         """特殊Quote 比較漂亮"""
         temp = await ctx.fetch_message(a)
-        message = "> "
-        message += temp.author.display_name + " 說了 " + temp.content
-        if reply != '':
-            message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
-        await ctx.send(message)
+        # message = "> "
+        # message += temp.author.display_name + " 說了 " + temp.content
+        # if reply != '':
+        #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
+
+        embed=discord.Embed(color=temp.author.roles[-1].color)
+        embed.add_field(name=temp.content,value=("在"+temp.created_at.strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
+        embed.set_footer(text=("標註者："+ctx.author.display_name))
+        await ctx.send(embed=embed)
+        #await ctx.send(message)
+    
+    @commands.command()
+    async def otherchannelquote(self, ctx,a: int,b: int):
+        """使用方法 $otherchannelquote <頻道ID> <要Quote的訊息ID>"""
+        tempchannel = await self.bot.fetch_channel(a)
+        temp = await tempchannel.fetch_message(b)
+        # message = "> "
+        # message += temp.author.display_name + " 說了 " + temp.content
+        # if reply != '':
+        #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
+
+        embed=discord.Embed(color=temp.author.roles[-1].color)
+        embed.add_field(name=temp.content,value=("在"+temp.created_at.strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
+        embed.set_footer(text=("標註者："+ctx.author.display_name))
+        await ctx.send(embed=embed)
+        #await ctx.send(message)
+
 
     @commands.command()
     async def 動彈不得(self, ctx):
