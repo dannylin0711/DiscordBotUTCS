@@ -3,6 +3,7 @@ import os
 import datetime
 import time
 import sqlite3
+from pytz import timezone
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from discord.utils import get
@@ -146,7 +147,8 @@ class mainCog(commands.Cog):
         #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
 
         embed=discord.Embed(color=temp.author.roles[-1].color)
-        embed.add_field(name=temp.content,value=("在"+temp.created_at.strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed.add_field(name=temp.content,value=("在"+temp.created_at.astimezone('Asia/Taipei').strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+
         embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
         embed.set_footer(text=("標註者："+ctx.author.display_name))
         await ctx.send(embed=embed)
@@ -163,7 +165,7 @@ class mainCog(commands.Cog):
         #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
 
         embed=discord.Embed(color=temp.author.roles[-1].color)
-        embed.add_field(name=temp.content,value=("在"+temp.created_at.strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed.add_field(name=temp.content,value=("在"+temp.created_at.astimezone('Asia/Taipei').strftime("%Y-%m-%d %H:%M:%S")), inline=False)
         embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
         embed.set_footer(text=("標註者："+ctx.author.display_name))
         await ctx.send(embed=embed)
