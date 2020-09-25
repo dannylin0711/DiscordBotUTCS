@@ -146,9 +146,9 @@ class mainCog(commands.Cog):
         # message += temp.author.display_name + " 說了 " + temp.content
         # if reply != '':
         #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
-        timezone = get_localzone()  
+        ttimezone = timezone('Asia/Taipei')  
         embed=discord.Embed(color=temp.author.roles[-1].color)
-        embed.add_field(name=temp.content,value=("在"+temp.created_at.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed.add_field(name=temp.content,value=("在"+temp.created_at.astimezone(ttimezone).strftime("%Y-%m-%d %H:%M:%S")), inline=False)
 
         embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
         embed.set_footer(text=("標註者："+ctx.author.display_name))
@@ -164,9 +164,9 @@ class mainCog(commands.Cog):
         # message += temp.author.display_name + " 說了 " + temp.content
         # if reply != '':
         #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
-        timezone = get_localzone()
+        ttimezone = timezone('Asia/Taipei')
         embed=discord.Embed(color=temp.author.roles[-1].color)
-        embed.add_field(name=temp.content,value=("在"+temp.created_at.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed.add_field(name=temp.content,value=("在"+temp.created_at.astimezone(ttimezone).strftime("%Y-%m-%d %H:%M:%S")), inline=False)
         embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
         embed.set_footer(text=("標註者："+ctx.author.display_name))
         await ctx.send(embed=embed)
