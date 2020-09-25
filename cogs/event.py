@@ -82,7 +82,7 @@ class Events(commands.Cog):
             tmessage += "　頻道　　　:"+ before.channel.name + "\n"
             tmessage += "　訊息發出者:"+ before.author.display_name + "\n"
             tmessage += "　時間　　　:"+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
-            tmessage += "　訊息內容　:"+ before.content + "\n"
+            tmessage += "　原訊息內容　:"+ before.content + "\n"
             tmessage += "　修改後內容:"+ after.content
         
             me = self.bot.get_user(201293557544255488)    

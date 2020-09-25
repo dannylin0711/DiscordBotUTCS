@@ -1,2 +1,3 @@
 import pytz
-print(pytz.all_timezones)
+print(pytz.timezone('UTC').utcoffset)
+print(pytz.timezone('Asia/Taipei').utcoffset)
