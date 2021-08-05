@@ -1,16 +1,15 @@
+import io
+
 import discord
 import os
 import datetime
 import time
 import sqlite3
 import pytz
-from datetime import timezone,timedelta
+import asyncio
+from datetime import timezone, timedelta
 from discord.ext import commands
-from discord.ext.commands import CommandNotFound
-from discord.utils import get
-from discord import Guild
-from discord import Client
-from discord import opus
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 startuptime = datetime.datetime.now()
 
@@ -31,18 +30,40 @@ class mainCog(commands.Cog):
         await ctx.send(a + b)
 
     @commands.command()
-    async def say(self, ctx, a: str):
+    async def say(self, ctx, *a):
         """讓機器人說話 因為是艾路貓所以會在尾巴說喵"""
-        print("輸入:" + a)
+
+        temp = '{}'.format(' '.join(a))
+        tempa = False
+        tempb = False
+        print(temp)
+        if '?' in temp:
+            temp.translate({ord('?'): None})
+            tempa = True
+        if '!' in temp:
+            temp.translate({ord('!'): None})
+            tempb = True
+        print(temp)
+        message = temp
+        print("輸入:" + temp)
         await ctx.message.delete()
-        message = a
-        if 'http' not in a:
-            if '<:' not in a:
+
+        if 'http' not in temp:
+            if '<:' not in temp:
                 message += "喵"
-        if '主人' in a:
+
+        if tempa:
+            message += "?"
+
+        if tempb:
+            message += "!"
+
+        if '主人' in temp:
             message = "你才不是主人呢"
-        if '啥小' in a or '幹' in a or '媽的' in a:
+
+        if '啥小' in temp or '幹' in temp or '媽的' in temp:
             message = "我不講髒話呦喵"
+
         print("輸出:" + message)
         await ctx.send(message)
 
@@ -102,36 +123,36 @@ class mainCog(commands.Cog):
         emojiString = ""
         for emoji in emojiList:
             emojiString += str(emoji)
-        await ctx.send(emojiString)    
-    
+        await ctx.send(emojiString)
+
     @commands.command()
-    async def kiang(self,ctx):
+    async def kiang(self, ctx):
         emoji = self.bot.get_emoji(699474147818078358)
         await ctx.message.delete()
         await ctx.send(emoji)
-        
+
     @commands.command()
-    async def 摸摸艾路貓(self,ctx):
+    async def 摸摸艾路貓(self, ctx):
         """摸摸艾路貓 他會很開心"""
         currectAuthor = str(ctx.author.id)
-        self.dbcursor.execute('SELECT * FROM PetCat WHERE userid ="' +currectAuthor+'"')
-        #self.dbcursor.execute('SELECT * FROM PetCat')
+        self.dbcursor.execute('SELECT * FROM PetCat WHERE userid ="' + currectAuthor + '"')
+        # self.dbcursor.execute('SELECT * FROM PetCat')
         temp = self.dbcursor.fetchone()
         petcounttemp = 0
         if temp == None:
-            self.dbconnect.execute('INSERT INTO PetCat ("userid","pettime") VALUES ("'+currectAuthor+'",1)')
+            self.dbconnect.execute('INSERT INTO PetCat ("userid","pettime") VALUES ("' + currectAuthor + '",1)')
             petcounttemp = 1
         else:
-            (userid,petcount) = temp
+            (userid, petcount) = temp
             petcounttemp = petcount
-            petcounttemp+=1
-            self.dbconnect.execute('UPDATE PetCat SET pettime='+str(petcounttemp)+' WHERE userid ="' +currectAuthor+'"')
+            petcounttemp += 1
+            self.dbconnect.execute(
+                'UPDATE PetCat SET pettime=' + str(petcounttemp) + ' WHERE userid ="' + currectAuthor + '"')
         self.dbconnect.commit()
         emoji = self.bot.get_emoji(754954248961261658)
         await ctx.send(emoji)
-        await ctx.send("你已經摸了艾路貓"+str(petcounttemp)+"次喔")
-        
-    
+        await ctx.send("你已經摸了艾路貓" + str(petcounttemp) + "次喔")
+
     @commands.command()
     async def logout(self, ctx):
         """沒事別用"""
@@ -139,9 +160,12 @@ class mainCog(commands.Cog):
         await self.bot.close()
 
     @commands.command()
-    async def quote(self, ctx,a: int,reply:str = ''):
+    async def quote(self, ctx, a: int, reply: str = ''):
         """特殊Quote 比較漂亮"""
         temp = await ctx.fetch_message(a)
+        tempguild = self.bot.get_guild(temp.guild.id)
+        this_message_author = await tempguild.fetch_member(temp.author.id)
+        print(this_message_author)
         # message = "> "
         # message += temp.author.display_name + " 說了 " + temp.content
         # if reply != '':
@@ -149,34 +173,39 @@ class mainCog(commands.Cog):
 
         tempmessage = temp.created_at
         tempmessage = tempmessage.replace(tzinfo=pytz.UTC)
-        embed=discord.Embed(color=temp.author.roles[-1].color)
-        embed.add_field(name=temp.content,value=("在"+tempmessage.astimezone(timezone(offset = timedelta(hours = 8))).strftime("%Y-%m-%d %H:%M:%S")), inline=False)
+        embed = discord.Embed(color=this_message_author.roles[-1].color)
+        embed.add_field(name=temp.content, value=(
+                "在" + tempmessage.astimezone(timezone(offset=timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S")),
+                        inline=False)
 
-        embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
-        embed.set_footer(text=("標註者："+ctx.author.display_name))
+        embed.set_author(name=this_message_author.display_name, icon_url=this_message_author.avatar_url)
+        embed.set_footer(text=("標註者：" + ctx.author.display_name))
         await ctx.send(embed=embed)
-        #await ctx.send(message)
-    
+        # await ctx.send(message)
+
     @commands.command()
-    async def otherchannelquote(self, ctx,a: int,b: int):
+    async def otherchannelquote(self, ctx, a: int, b: int):
         """使用方法 $otherchannelquote <頻道ID> <要Quote的訊息ID>"""
         tempchannel = await self.bot.fetch_channel(a)
         temp = await tempchannel.fetch_message(b)
+        tempguild = self.bot.get_guild(temp.guild.id)
+        this_message_author = await tempguild.fetch_member(temp.author.id)
+        print(this_message_author)
         # message = "> "
         # message += temp.author.display_name + " 說了 " + temp.content
         # if reply != '':
         #     message += "\n\n\n**" + ctx.author.display_name + "回應說:**\n\n" + reply
-        
 
         tempmessage = temp.created_at
         tempmessage = tempmessage.replace(tzinfo=pytz.UTC)
-        embed=discord.Embed(color=temp.author.roles[-1].color)
-        embed.add_field(name=temp.content,value=("在"+tempmessage.astimezone(timezone(offset = timedelta(hours = 8))).strftime("%Y-%m-%d %H:%M:%S")), inline=False)
-        embed.set_author(name=temp.author.display_name,icon_url=temp.author.avatar_url)
-        embed.set_footer(text=("標註者："+ctx.author.display_name))
+        embed = discord.Embed(color=this_message_author.roles[-1].color)
+        embed.add_field(name=temp.content, value=(
+                "在" + tempmessage.astimezone(timezone(offset=timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S")),
+                        inline=False)
+        embed.set_author(name=this_message_author.display_name, icon_url=this_message_author.avatar_url)
+        embed.set_footer(text=("標註者：" + ctx.author.display_name))
         await ctx.send(embed=embed)
-        #await ctx.send(message)
-
+        # await ctx.send(message)
 
     @commands.command()
     async def 動彈不得(self, ctx):
@@ -193,6 +222,83 @@ class mainCog(commands.Cog):
 
     # 主人我來救您了喵!(跑到旁邊喝水""")
 
+    @commands.command()
+    async def 我要一杯珍珠奶茶(self,ctx):
+        await ctx.send("我們沒有賣珍珠奶茶喔~")
+
+    @commands.command()
+    async def 我要一杯QQㄋㄟㄋㄟ好喝到咩噗茶(self, ctx):
+        await ctx.send("珍奶 正常微冰")
+
+    @commands.command()
+    async def padoru(self, ctx):
+        temptime = datetime.datetime.now()
+        temptimeyear = temptime.strftime("%Y")
+        temptime = datetime.datetime.strptime(temptime.strftime("%m-%d"),"%m-%d")
+        christmas = datetime.datetime.strptime("12-25", "%m-%d")
+        christmas_date_string = christmas.strftime("%m-%d")
+        temptime_date_string = temptime.strftime("%m-%d")
+        if christmas_date_string == temptime_date_string:
+            await ctx.message.channel.send('走れそりを')
+            await asyncio.sleep(2)
+            await ctx.message.channel.send("風のように")
+            await asyncio.sleep(2)
+            await ctx.message.channel.send('つきみはらを')
+            await asyncio.sleep(2)
+            await ctx.message.channel.send('パドル　パドル')
+            await ctx.message.channel.send("https://c.tenor.com/xYq4RnxDODEAAAAM/padoru-padoru-anime.gif")
+        else:
+            if temptime < christmas:
+                delta = christmas - temptime
+                print(delta.days)
+                img = Image.open("cogs/asset/padoru.png")
+                font = ImageFont.truetype("C:/Windows/Fonts/Broadw.ttf", 25)
+                img_txt = Image.new("1", font.getsize(str(delta.days)))
+                draw = ImageDraw.Draw(img_txt)
+                draw.text((0, 0), str(delta.days), 1, font=font)
+                w = img_txt.rotate(10, expand=1)
+                img.paste((120, 5, 11), (72, 145), w)
+                # draw.text((71, 153), str(delta.days), font=font, fill=(93, 5, 11))
+                # img.show()
+                arr = io.BytesIO()
+                img.save(arr, format='PNG')
+                arr.seek(0)
+                file = discord.File(arr)
+                file.filename = "file.png"
+                await ctx.send(file=file)
+            else:
+                temptime = datetime.datetime.strptime(temptimeyear+temptime.strftime("-%m-%d"), "%Y-%m-%d")
+                temptimeyearint = int(temptimeyear) + 1
+                christmas = datetime.datetime.strptime(str(temptimeyearint)+"-12-25", "%Y-%m-%d")
+                delta = christmas - temptime
+
+                img = Image.open("cogs/asset/padoru.png")
+                font = ImageFont.truetype("C:/Windows/Fonts/Broadw.ttf", 25)
+                img_txt = Image.new("1", font.getsize(str(delta.days)))
+                draw = ImageDraw.Draw(img_txt)
+                draw.text((0, 0), str(delta.days), 1, font=font)
+                w = img_txt.rotate(10, expand=1)
+                img.paste((120, 5, 11), (72, 145), w)
+                # draw.text((71, 153), str(delta.days), font=font, fill=(93, 5, 11))
+                img.show()
+                arr = io.BytesIO()
+                img.save(arr, format='PNG')
+                arr.seek(0)
+                file = discord.File(arr)
+                file.filename = "file.png"
+                await ctx.send(file=file)
+                # print(delta.days)
+
+    @commands.command()
+    async def lmgtfy(self, ctx, *args):
+        temp = '{}'.format('+'.join(args))
+        string = "http://letmegooglethat.com/?q="+temp
+        await ctx.send(string)
+
+    @commands.command()
+    async def peko(self,ctx):
+        await ctx.send("peko↗peko↘peko↗peko↘peko↗peko↘peko↗peko↘")
+
     @commands.command(pass_context=True)
     async def ping(self, ctx):
         """ Pong! """
@@ -202,12 +308,12 @@ class mainCog(commands.Cog):
         ping = (time.monotonic() - before) * 1000
         await message.edit(content=f"Pong!  `{int(ping)}ms`")
         print(f'Ping {int(ping)}ms')
-        
+
     @commands.command()
-    async def getMessageAuthorID(self,ctx):
+    async def getMessageAuthorID(self, ctx):
         authorID = ctx.author
         print(authorID.id)
 
-    
+
 def setup(bot):
     bot.add_cog(mainCog(bot))

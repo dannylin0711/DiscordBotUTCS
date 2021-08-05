@@ -1,3 +1,6 @@
 .DS_Store
 *.pyc
-.vscode/
+.vscode/*
+venv/*
+.vscode/settings.json
+.idea/
