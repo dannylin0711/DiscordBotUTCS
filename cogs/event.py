@@ -59,7 +59,7 @@ class Events(commands.Cog):
             tmessage += "　訊息發出者:"+ message.author.display_name + "\n"
             tmessage += "　時間　　　:"+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
             tmessage += "　訊息內容　:"+ message.content
-            await me = self.bot.fetch_user(201293557544255488)    
+            me = await self.bot.fetch_user(201293557544255488)    
             await me.send(str(tmessage))
 
             if message.attachments:
