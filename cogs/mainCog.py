@@ -253,7 +253,7 @@ class mainCog(commands.Cog):
                 delta = christmas - temptime
                 print(delta.days)
                 img = Image.open("cogs/asset/padoru.png")
-                font = ImageFont.truetype("C:/Windows/Fonts/Broadw.ttf", 25)
+                # font = ImageFont.truetype("C:/Windows/Fonts/Broadw.ttf", 25)
                 img_txt = Image.new("1", font.getsize(str(delta.days)))
                 draw = ImageDraw.Draw(img_txt)
                 draw.text((0, 0), str(delta.days), 1, font=font)
@@ -274,7 +274,7 @@ class mainCog(commands.Cog):
                 delta = christmas - temptime
 
                 img = Image.open("cogs/asset/padoru.png")
-                font = ImageFont.truetype("C:/Windows/Fonts/Broadw.ttf", 25)
+                # font = ImageFont.truetype("C:/Windows/Fonts/Broadw.ttf", 25)
                 img_txt = Image.new("1", font.getsize(str(delta.days)))
                 draw = ImageDraw.Draw(img_txt)
                 draw.text((0, 0), str(delta.days), 1, font=font)
