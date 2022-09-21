@@ -104,5 +104,5 @@ class HPSH(commands.Cog):
         else:
             await ctx.send("這個伺服器不能使用這個指令喔~")
     
-def setup(bot):
-    bot.add_cog(HPSH(bot))
+async def setup(bot):
+    await bot.add_cog(HPSH(bot))

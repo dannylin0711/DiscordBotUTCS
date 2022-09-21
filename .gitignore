@@ -4,3 +4,4 @@
 venv/*
 .vscode/settings.json
 .idea/
+bot/

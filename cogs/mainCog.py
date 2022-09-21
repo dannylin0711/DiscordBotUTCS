@@ -9,6 +9,7 @@ import pytz
 import asyncio
 from datetime import timezone, timedelta
 from discord.ext import commands
+from discord.ext.commands import Bot
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 startuptime = datetime.datetime.now()
@@ -16,7 +17,7 @@ startuptime = datetime.datetime.now()
 
 class mainCog(commands.Cog):
 
-    def __init__(self, bot):
+    def __init__(self, bot:Bot):
         self.bot = bot
         self.dbconnect = sqlite3.connect('petcat.db')
         self.dbcursor = self.dbconnect.cursor()
@@ -313,7 +314,18 @@ class mainCog(commands.Cog):
     async def getMessageAuthorID(self, ctx):
         authorID = ctx.author
         print(authorID.id)
+        
+    @commands.command()
+    async def sync(self, ctx):
+        guild = ctx.guild
+        await self.bot.tree.sync(guild=guild)
+        await ctx.send("Command Synced")
+    
+    # @commands.command()
+    # async def getAll(self, ctx):
+    #     l = self.bot.get_command('testing')
+    #     await ctx.send(l)
 
 
-def setup(bot):
-    bot.add_cog(mainCog(bot))
+async def setup(bot):
+    await bot.add_cog(mainCog(bot))
