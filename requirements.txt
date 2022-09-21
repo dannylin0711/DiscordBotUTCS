@@ -6,4 +6,4 @@ youtube_dl
 toml
 pytz~=2020.4
 Pillow~=8.1.0
-feedparser~=6.0.2
+ColorThief
