@@ -1,9 +1,4 @@
-dnspython
-PyNaCl
-async-timeout
 discord.py
-youtube_dl
-toml
 pytz~=2020.4
 Pillow~=8.1.0
 ColorThief
