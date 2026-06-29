@@ -51,16 +51,9 @@ class Events(commands.Cog):
         if 'ㄎㄧㄤ' in temp:
             emoji = self.bot.get_emoji(699474147818078358)
             await message.add_reaction(emoji)
-            
-        
-        
-            
+             
         await self.check_trigger(temp, message)
         
-        
-        # if "那傢伙竟敢無視燈" in temp:
-        #     await message.channel.send("https://media.discordapp.net/attachments/623364982800908289/1312406602179154010/9__19776__19832.gif?ex=67870c25&is=6785baa5&hm=1fa0621e7b25e2efa5253d4a90eae2813751663408d67f8744097d18adea88a4")
-
         if message.author.id in global_var.global_listener:
             if global_var.voice is None:
                 await message.add_reaction('❌')
