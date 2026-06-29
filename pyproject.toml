@@ -4,7 +4,7 @@ version = "0.0.1"
 dependencies = [
     "discord-py[voice]==2.7.1",
     "pytz",
-    "pillow>=12.0.0",
+    "pillow>=12.2.0",
     "colorthief",
     "python-dotenv==0.20.0",
     "apscheduler",
