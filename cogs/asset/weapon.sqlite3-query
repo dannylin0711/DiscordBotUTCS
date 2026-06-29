@@ -1,0 +1,41 @@
+-- database: ./mhwilds.db
+
+-- create TABLE weapon(
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     name TEXT NOT NULL,
+--     type TEXT NOT NULL,
+--     description TEXT NOT NULL,
+--     attack INTEGER NOT NULL,
+--     affinity INTEGER NOT NULL,
+--     element TEXT NOT NULL,
+--     element_attack INTEGER NOT NULL,
+--     sharpness INTEGER NOT NULL,
+--     max_sharpness INTEGER NOT NULL,
+--     slot1 INTEGER NOT NULL,
+--     slot2 INTEGER NOT NULL,
+--     slot3 INTEGER NOT NULL
+-- )
+
+-- create table weapon_skills(
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     weapon_id INTEGER NOT NULL,
+--     skill_id INTEGER NOT NULL,
+--     level INTEGER NOT NULL,
+--     FOREIGN KEY(weapon_id) REFERENCES weapon(id),
+--     FOREIGN KEY(skill_id) REFERENCES skill(id)
+-- )
+
+create table weapon_needed_items(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    weapon_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY(weapon_id) REFERENCES weapon(id),
+    FOREIGN KEY(item_id) REFERENCES item(id)
+)
+
+-- create table item(
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     name TEXT NOT NULL,
+--     description TEXT NOT NULL
+-- )

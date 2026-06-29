@@ -1,0 +1,27 @@
+[project]
+name = "DiscordUTCS"
+version = "0.0.1"
+dependencies = [
+    "discord-py[voice]==2.7.1",
+    "pytz",
+    "pillow>=12.0.0",
+    "colorthief",
+    "python-dotenv==0.20.0",
+    "apscheduler",
+    "discord-ext-voice-recv",
+    "opencc",
+    "apscheduler",
+    "requests>=2.32.3",
+    "beautifulsoup4>=4.13.4",
+    "apnggif>=0.1.4",
+    "edge-tts>=7.0.2",
+    "sseclient>=0.0.27",
+    "groq[aiohttp]>=1.1.1",
+    "numpy>=2.2.6",
+    "pip-system-certs>=5.3",
+    "certifi>=2025.4.26",
+    "pyopenssl>=25.3.0",
+]
+
+[tool.uv]
+package = false

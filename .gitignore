@@ -5,3 +5,13 @@ venv/*
 .vscode/settings.json
 .idea/
 bot/
+
+.vscode/
+.claude/
+.github/
+.venv/
+
+__pycache__/
+
+cache/
+*.log*

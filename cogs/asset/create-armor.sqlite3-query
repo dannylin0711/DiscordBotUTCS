@@ -1,0 +1,28 @@
+-- database: ./mhwilds.db
+
+-- CREATE TABLE IF NOT EXISTS armor(
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     name TEXT NOT NULL,
+--     rarity INTEGER NOT NULL,
+--     type TEXT NOT NULL,
+--     description TEXT NOT NULL,
+--     defense INTEGER NOT NULL,
+--     fire_res INTEGER NOT NULL,
+--     water_res INTEGER NOT NULL,
+--     thunder_res INTEGER NOT NULL,
+--     ice_res INTEGER NOT NULL,
+--     dragon_res INTEGER NOT NULL,
+--     slot1 INTEGER NOT NULL,
+--     slot2 INTEGER NOT NULL,
+--     slot3 INTEGER NOT NULL,
+--     icon_link TEXT NOT NULL
+-- )
+
+CREATE TABLE IF NOT EXISTS armor_skills(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    armor_id INTEGER NOT NULL,
+    skill_id INTEGER NOT NULL,
+    level INTEGER NOT NULL,
+    FOREIGN KEY(armor_id) REFERENCES armor(id),
+    FOREIGN KEY(skill_id) REFERENCES skills(id)
+)

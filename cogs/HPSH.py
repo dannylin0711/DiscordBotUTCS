@@ -12,6 +12,9 @@ from discord.utils import get
 from discord import Guild
 from discord import Client
 from discord import opus
+from discord import app_commands
+
+from static import utcs, hpsh
 
 startuptime = datetime.datetime.now()
 
@@ -31,7 +34,10 @@ class HPSH(commands.Cog):
     #     randomnum = random.randint(0, totalnum-1)
     #     await ctx.send(topax[randomnum])
     
-    @commands.command()
+    @commands.hybrid_command(name="子暘語錄", with_app_command=True, description="這是 topax 的語錄")
+    # @commands.command()
+    @app_commands.guilds(utcs, hpsh)
+    @app_commands.rename(a='編號')
     async def 子暘語錄(self, ctx, a: int=-1):
         """這是 topax 的語錄 """
         
@@ -42,18 +48,18 @@ class HPSH(commands.Cog):
             topax_member = await tempguild.fetch_member(static_topax_id)
         
             embed=discord.Embed()
-            embed.set_author(name=topax_member.display_name,icon_url=topax_member.avatar_url)
+            embed.set_author(name=topax_member.display_name,icon_url=topax_member.display_avatar.url)
         
             f = open("cogs/asset/text/topax.txt", 'r', encoding="utf-8")
             topax = f.readlines()
             if a == -1:
                 totalnum = len(topax)
                 randomnum = random.randint(0, totalnum-1)
-                embed.add_field(name=topax[randomnum],value="by 周子暘topax",inline=False)
+                embed.add_field(name=topax[randomnum],value="",inline=False)
                 embed.set_footer(text=("子暘語錄 #"+str(randomnum+1)))
                 await ctx.send(embed=embed)
             else:
-                embed.add_field(name=topax[a-1],value="by 周子暘topax",inline=False)
+                embed.add_field(name=topax[a-1],value="",inline=False)
                 embed.set_footer(text=("子暘語錄 #"+str(a)))
                 await ctx.send(embed=embed)
         else:
@@ -95,7 +101,7 @@ class HPSH(commands.Cog):
             f = open("cogs/asset/text/topax.txt",'r',encoding="utf-8")
             templist = f.readlines()
             a = '```'
-            tempnum = 1;
+            tempnum = 1
             for t in templist:
                 a += "{:-2d}. {text}".format(tempnum,text=t)
                 tempnum += 1

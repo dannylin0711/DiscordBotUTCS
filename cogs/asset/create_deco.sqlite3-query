@@ -1,0 +1,14 @@
+-- database: ./mhwilds.db
+
+CREATE TABLE IF NOT EXISTS decoration(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    slot INTEGER NOT NULL,
+    main_skill TEXT NOT NULL,
+    skill_id INTEGER,
+    main_level INTEGER NOT NULL,
+    sub_skill_id INTEGER,
+    sub_level INTEGER,
+    FOREIGN KEY(skill_id) REFERENCES skill(id),
+    FOREIGN KEY(sub_skill_id) REFERENCES skill(id)
+)
