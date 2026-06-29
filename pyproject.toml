@@ -6,7 +6,7 @@ dependencies = [
     "pytz",
     "pillow>=12.0.0",
     "colorthief",
-    "python-dotenv==0.20.0",
+    "python-dotenv==1.2.2",
     "apscheduler",
     "discord-ext-voice-recv",
     "opencc",
